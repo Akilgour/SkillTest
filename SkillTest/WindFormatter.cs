@@ -1,6 +1,7 @@
 ﻿namespace Mma.Common
 {
     using System.Text;
+    using Mma.Common.Helpers;
     using Mma.Common.models;
 
     public interface IWindFormatter
@@ -14,8 +15,8 @@
         {
             var result = new StringBuilder();
 
-            result.Append($"{windData.AverageWindDirection,000}");
-            result.Append($"{windData.AverageWindSpeed,00}");
+            result.Append($"{DisplayAverageSurfaceWind.Resolve(windData)}");
+            result.Append($"{windData.AverageWindSpeed:00}");
             result.Append("KT");
             
             return result.ToString();
