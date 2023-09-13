@@ -2,7 +2,7 @@
 {
     using Mma.Common.models;
 
-    public static class DisplayAverageSurfaceWind
+    public static class DisplayAverageSurfaceWindDirection
     {
         public static string Resolve(WindData windData)
         {

@@ -27,7 +27,7 @@
                 AverageWindDirection = direction,
             };
 
-            var result = DisplayAverageSurfaceWind.Resolve(data);
+            var result = DisplayAverageSurfaceWindDirection.Resolve(data);
 
             Assert.That(result, Is.EqualTo(expected));
         }
