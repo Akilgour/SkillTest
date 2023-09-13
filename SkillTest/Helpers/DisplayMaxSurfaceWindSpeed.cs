@@ -6,10 +6,16 @@
     {
         public static string Resolve(WindData windData)
         {
-            if (windData.MaximumWindSpeed == null)
+            if(windData.AverageWindSpeed == windData.MaximumWindSpeed)
             {
-                return "//";
+                return "";
             }
+          
+            if ((  windData.MaximumWindSpeed- windData.AverageWindSpeed) < 10)
+            {
+                return "";
+            }
+           
             return $"{windData.MaximumWindSpeed:00}";
         }
     }
