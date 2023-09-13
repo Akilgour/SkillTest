@@ -1,6 +1,5 @@
 ﻿namespace Test.Mma.Common.Helpers
 {
-    using global::Mma.Common;
     using global::Mma.Common.Helpers;
     using global::Mma.Common.models;
     using NUnit.Framework;
@@ -8,13 +7,6 @@
     [TestFixture]
     public class Display_Average_Surface_Wind_Direction_Test
     {
-        private IWindFormatter formatter;
-
-        [SetUp]
-        public void SetUp()
-        {
-            formatter = new WindFormatter();
-        }
 
         [TestCase(null, "///")]
         [TestCase(10, "010")]
