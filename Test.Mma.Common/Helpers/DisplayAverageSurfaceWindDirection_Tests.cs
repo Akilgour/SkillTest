@@ -5,7 +5,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class Display_Average_Surface_Wind_Direction_Test
+    public class Display_average_surface_wind_direction_tests
     {
 
         [TestCase(null, "///")]
@@ -14,13 +14,14 @@
         [TestCase(350, "350")]
         public void Average_wind_direction_is_correct(double? direction, string expected)
         {
+            //Arrange
             var data = new WindData
             {
                 AverageWindDirection = direction,
             };
-
+            //Act
             var result = DisplayAverageSurfaceWindDirection.Resolve(data);
-
+            //Assert
             Assert.That(result, Is.EqualTo(expected));
         }
     }

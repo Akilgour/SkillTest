@@ -21,6 +21,7 @@
         [TestCase(350, "35025KT")]
         public void Average_wind_direction_is_correct(double? direction, string expected)
         {
+            //Arrange
             var data = new WindData
             {
                 AverageWindDirection = direction,
@@ -29,9 +30,9 @@
                 MinimumWindDirection = direction,
                 MaximumWindDirection = direction
             };
-
+            //Act
             var result = formatter.FormatWind(data);
-
+            //Assert
             Assert.That(result, Is.EqualTo(expected));
         }
 

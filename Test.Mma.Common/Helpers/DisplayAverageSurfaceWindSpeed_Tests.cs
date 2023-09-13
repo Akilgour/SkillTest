@@ -7,7 +7,7 @@ namespace Test.Mma.Common.Helpers
     using NUnit.Framework;
 
     [TestFixture]
-    internal class Display_Average_Surface_WindSpeed_Test
+    internal class Display_average_surface_wind_speed_tests
     {
         [TestCase(null, "//")]
         [TestCase(10, "10")]
