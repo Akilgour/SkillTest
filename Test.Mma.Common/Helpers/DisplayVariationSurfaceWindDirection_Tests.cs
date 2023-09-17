@@ -89,7 +89,8 @@
             {
                 MinimumWindDirection = minimumWindDirection,
                 MaximumWindDirection = maximumWindDirection,
-                AverageWindSpeed = averageWindSpeed
+                AverageWindSpeed = averageWindSpeed,
+                AverageWindDirection = 2 // This is needed for IsThereExtremeWindDirections
             };
             //Act
             var result = DisplayVariationSurfaceWindDirection.Resolve(data);
@@ -97,5 +98,56 @@
             Assert.That(result, Is.EqualTo(expected));
         }
 
+        [Theory]
+        [TestCase(10, 190)]
+        [TestCase(10, 200)]
+        [TestCase(20, 220)]
+        public void Extreme_wind_as_varation_is_180_degrees_or_more(double? minimumWindDirection, double? maximumWindDirection)
+        {
+            //Arrange
+            var data = new WindData
+            {
+                MinimumWindDirection = minimumWindDirection,
+                MaximumWindDirection = maximumWindDirection,
+            };
+            //Act
+            var result = DisplayVariationSurfaceWindDirection.Resolve(data);
+            //Assert
+            Assert.That(result, Is.EqualTo(""));
+
+        }
+
+        [Theory]
+        [TestCase(10, 71)]
+        [TestCase(10, 80)]
+        [TestCase(10, 189)]
+        public void Not_extreme_wind_as_varation_is_less_than_180_degrees_and_average_wind_direction_known(double? minimumWindDirection, double? maximumWindDirection)
+        {
+            //Arrange
+            var data = new WindData
+            {
+                MinimumWindDirection = minimumWindDirection,
+                MaximumWindDirection = maximumWindDirection,
+                AverageWindDirection = 1,
+            };
+            //Act
+            var result = DisplayVariationSurfaceWindDirection.Resolve(data);
+            //Assert
+            Assert.That(result, Is.EqualTo(""));
+        }
+
+        [Test]
+        public void Extreme_wind_as_average_direction_not_Know()
+        {
+            //Arrange
+            var data = new WindData
+            {
+                AverageWindDirection = null,
+            };
+            //Act
+            var result = DisplayVariationSurfaceWindDirection.Resolve(data);
+            //Assert
+            Assert.That(result, Is.EqualTo(""));
+        }
     }
 }

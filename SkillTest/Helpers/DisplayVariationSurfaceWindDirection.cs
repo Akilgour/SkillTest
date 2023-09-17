@@ -6,6 +6,11 @@
     {
         public static string Resolve(WindData windData)
         {
+            if (IsThereExtremeWindDirections.Resolve(windData))
+            {
+                return "";
+            }
+
             // AK I am not 100% sure on where there -or- and -and- are in this sentance.
             // So I would go find a product owner, and just have a chat
 
