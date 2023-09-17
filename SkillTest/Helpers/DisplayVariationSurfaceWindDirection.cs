@@ -6,20 +6,29 @@
     {
         public static string Resolve(WindData windData)
         {
-            var minimumWindDirection = "///";
-            var maximumWindDirection = "///";
+            // AK I am not 100% sure on where there -or- and -and- are in this sentance.
+            // So I would go find a product owner, and just have a chat
 
-            if (windData.MinimumWindDirection != null)
+            // Variations in wind direction shall be reported only when
+            //      the total variation in direction over the previous ten - minute period is 60 degrees or more
+            //  or
+            //      but less than 180 degrees
+            //  and the average wind speed is greater than 3 knots.
+
+            var variationInDirection = windData.MaximumWindDirection - windData.MinimumWindDirection;
+
+            if (variationInDirection >= 60 && variationInDirection < 180)
             {
-                minimumWindDirection = $"{windData.MinimumWindDirection:000}";
+                if (windData.AverageWindSpeed > 3)
+                {
+                    var minimumWindDirection = $"{windData.MinimumWindDirection:000}";
+                    var maximumWindDirection = $"{windData.MaximumWindDirection:000}";
+
+                    return $"{minimumWindDirection}V{maximumWindDirection}";
+                }
             }
 
-            if (windData.MaximumWindDirection != null)
-            {
-                maximumWindDirection = $"{windData.MaximumWindDirection:000}";
-            }
-
-            return $"{minimumWindDirection}V{maximumWindDirection}";
+            return "";
         }
     }
 }
