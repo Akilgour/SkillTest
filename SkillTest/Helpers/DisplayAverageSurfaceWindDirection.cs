@@ -1,11 +1,17 @@
 ﻿namespace Mma.Common.Helpers
 {
     using Mma.Common.models;
+    using System.Security.Cryptography;
 
     public static class DisplayAverageSurfaceWindDirection
     {
         public static string Resolve(WindData windData)
         {
+            if (IsThereExtremeWindDirections.Resolve(windData))
+            {
+                return "VRB";
+            }
+
             // AK I am not 100% sure on where there -or- and -and- are in this sentance.
             // So I would go find a product owner, and just have a chat
 
@@ -25,8 +31,8 @@
                     return $"{windData.AverageWindDirection:000}"; ;
                 }
             }
-
             return "VRB";
+             
         }
     }
 }

@@ -96,7 +96,7 @@
         [TestCase(20, 220, 120, 1, "120")]
         [TestCase(20, 220, 120, 2, "120")]
         [TestCase(20, 220, 120, 3, "120")]
-        public void Average_wind_direction_is_shown_as_varation_is_180_degrees_or_more_and_wind_speed_3_knots_or_less(double? minimumWindDirection, double? maximumWindDirection, double? averageWindDirection, double? averageWindSpeed, string expected)
+        public void Average_wind_direction_is_VRB_as_varation_is_180_degrees_or_more_and_wind_speed_3_knots_or_less(double? minimumWindDirection, double? maximumWindDirection, double? averageWindDirection, double? averageWindSpeed, string expected)
         {
             //Arrange
             var data = new WindData
@@ -109,7 +109,7 @@
             //Act
             var result = DisplayAverageSurfaceWindDirection.Resolve(data);
             //Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo("VRB"));
         }
 
         [Theory]
@@ -174,6 +174,58 @@
                 MinimumWindDirection = minimumWindDirection,
                 MaximumWindDirection = maximumWindDirection,
                 AverageWindSpeed = averageWindSpeed
+            };
+            //Act
+            var result = DisplayAverageSurfaceWindDirection.Resolve(data);
+            //Assert
+            Assert.That(result, Is.EqualTo("VRB"));
+        }
+
+        [Theory]
+        [TestCase(10, 190)]
+        [TestCase(10, 200)]
+        [TestCase(20, 220)]
+        public void Extreme_wind_as_varation_is_180_degrees_or_more(double? minimumWindDirection, double? maximumWindDirection)
+        {
+            //Arrange
+            var data = new WindData
+            {
+                MinimumWindDirection = minimumWindDirection,
+                MaximumWindDirection = maximumWindDirection,
+            };
+            //Act
+            var result = DisplayAverageSurfaceWindDirection.Resolve(data);
+            //Assert
+            Assert.That(result, Is.EqualTo("VRB"));
+
+        }
+
+        [Theory]
+        [TestCase(10, 71)]
+        [TestCase(10, 80)]
+        [TestCase(10, 189)]
+        public void Not_extreme_wind_as_varation_is_less_than_180_degrees_and_average_wind_direction_known(double? minimumWindDirection, double? maximumWindDirection)
+        {
+            //Arrange
+            var data = new WindData
+            {
+                MinimumWindDirection = minimumWindDirection,
+                MaximumWindDirection = maximumWindDirection,
+                AverageWindDirection = 1,
+            };
+            //Act
+            var result = DisplayAverageSurfaceWindDirection.Resolve(data);
+            //Assert
+            Assert.That(result, Is.EqualTo("VRB"));
+        }
+
+        [Test]
+        public void Extreme_wind_as_average_direction_not_Know()
+        {
+            //Arrange
+            var data = new WindData
+            {
+                AverageWindDirection = null,
             };
             //Act
             var result = DisplayAverageSurfaceWindDirection.Resolve(data);
