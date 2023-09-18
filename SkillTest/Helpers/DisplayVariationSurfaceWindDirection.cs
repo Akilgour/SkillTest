@@ -26,8 +26,8 @@
             {
                 if (windData.AverageWindSpeed > 3)
                 {
-                    var minimumWindDirection = $"{windData.MinimumWindDirection:000}";
-                    var maximumWindDirection = $"{windData.MaximumWindDirection:000}";
+                    var minimumWindDirection = $"{RoundDegreesDown.Resolve(windData.MinimumWindDirection):000}";
+                    var maximumWindDirection = $"{RoundDegreesDown.Resolve(windData.MaximumWindDirection):000}";
 
                     return $"{minimumWindDirection}V{maximumWindDirection}";
                 }

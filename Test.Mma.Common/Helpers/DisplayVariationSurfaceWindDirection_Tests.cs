@@ -75,12 +75,12 @@
             Assert.IsEmpty(result);
         }
 
-        [TestCase(10, 71, 3.1, "010V071")]
-        [TestCase(10, 71, 4, "010V071")]
+        [TestCase(10, 71, 3.1, "010V070")]
+        [TestCase(10, 71, 4, "010V070")]
         [TestCase(10, 80, 3.1, "010V080")]
         [TestCase(10, 80, 4, "010V080")]
-        [TestCase(10, 189, 3.1, "010V189")]
-        [TestCase(10, 189, 4, "010V189")]
+        [TestCase(10, 189, 3.1, "010V190")]
+        [TestCase(10, 189, 4, "010V190")]
         [TestCase(300, 360, 4, "300V360")]
         public void Wind_Variation_is_show_as_varation_is_between_60_180_degrees_but_average_wind_speed_is_greater_than_3_knots(double? minimumWindDirection, double? maximumWindDirection, double averageWindSpeed, string expected)
         {

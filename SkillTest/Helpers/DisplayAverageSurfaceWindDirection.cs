@@ -1,7 +1,6 @@
 ﻿namespace Mma.Common.Helpers
 {
     using Mma.Common.models;
-    using System.Security.Cryptography;
 
     public static class DisplayAverageSurfaceWindDirection
     {
@@ -28,7 +27,7 @@
             {
                 if (windData.AverageWindSpeed <= 3)
                 {
-                    return $"{windData.AverageWindDirection:000}"; ;
+                    return $"{RoundDegreesDown.Resolve(windData.AverageWindDirection):000}"; ;
                 }
             }
             return "VRB";
