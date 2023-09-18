@@ -36,5 +36,21 @@
             Assert.That(result, Is.EqualTo(expected));
         }
 
+        [Theory]
+        [TestCase(0)]
+        [TestCase(0.1)]
+        [TestCase(0.9)]
+        public void It_is_calm_wind_speed_less_than_one_knot(double? averageWindSpeed)
+        {
+            //Arrange
+            var data = new WindData
+            {
+                AverageWindSpeed = averageWindSpeed,
+            };
+            //Act
+            var result = formatter.FormatWind(data);
+            //Assert
+            Assert.That(result, Is.EqualTo("00000KT"));
+        }
     }
 }

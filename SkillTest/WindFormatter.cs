@@ -13,6 +13,11 @@
     {
         public string FormatWind(WindData windData)
         {
+            if(IsItCalm.Resolve(windData))
+            {
+                return "00000KT";
+            }
+
             var result = new StringBuilder();
 
             result.Append($"{DisplayAverageSurfaceWindDirection.Resolve(windData)}");
