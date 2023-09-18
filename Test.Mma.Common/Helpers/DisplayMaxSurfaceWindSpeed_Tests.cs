@@ -44,6 +44,8 @@
         }
 
         [TestCase(1, 15, "15")]
+        [TestCase(1, 15.1, "15")]
+        [TestCase(1, 15.99, "16")]
         [TestCase(2, 15, "15")]
         [TestCase(5, 15, "15")]
         [TestCase(9, 20, "20")]
@@ -83,6 +85,24 @@
             var result = DisplayMaxSurfaceWindSpeed.Resolve(data);
             //Assert
             Assert.IsEmpty(result);
+        }
+
+        [Theory]
+        [TestCase(100)]
+        [TestCase(101)]
+        [TestCase(500)]
+        public void Max_wind_speed_is_is_100_knots_or_more_the_wind_speed_should_be_encoded_as_P99(double? maximumWindSpeed)
+        {
+            //Arrange
+            var data = new WindData
+            {
+                AverageWindSpeed = 10,
+                MaximumWindSpeed = maximumWindSpeed,
+            };
+            //Act
+            var result = DisplayMaxSurfaceWindSpeed.Resolve(data);
+            //Assert
+            Assert.That("P99", Is.EqualTo(result));
         }
     }
 }

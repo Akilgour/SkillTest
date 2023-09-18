@@ -10,7 +10,13 @@
             {
                 return "//";
             }
-            return $"{windData.AverageWindSpeed:00}";
+
+            if (WindSpeedMaxKnots.Resolve(windData.AverageWindSpeed))
+            {
+                return "P99";
+            }
+
+            return $"{WindSpeedInKnots.Resolve(windData.AverageWindSpeed):00}";
         }
     }
 }
