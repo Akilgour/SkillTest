@@ -15,7 +15,7 @@
             formatter = new WindFormatter();
         }
 
-        [TestCase(null, "///25KY")]
+        [TestCase(null, "///25KT")] // AK This test was ///25KY when I got here but that does not match spec?
         [TestCase(10, "01025KT")]
         [TestCase(15, "01025KT")]
         [TestCase(350, "35025KT")]
@@ -52,5 +52,6 @@
             //Assert
             Assert.That(result, Is.EqualTo("00000KT"));
         }
+ 
     }
 }

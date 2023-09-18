@@ -6,6 +6,11 @@
     {
         public static string Resolve(WindData windData)
         {
+            if(windData.AverageWindDirection == null)
+            {
+                return "///";
+            }
+
             if (IsThereExtremeWindDirections.Resolve(windData))
             {
                 return "VRB";
@@ -25,7 +30,7 @@
 
             if (variationInDirection <= 60 || variationInDirection > 180)
             {
-                if (windData.AverageWindSpeed <= 3)
+                if (windData.AverageWindSpeed > 3)
                 {
                     return $"{RoundDegreesDown.Resolve(windData.AverageWindDirection):000}"; ;
                 }

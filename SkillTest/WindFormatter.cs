@@ -20,9 +20,14 @@
 
             var result = new StringBuilder();
 
+ 
+
             result.Append($"{DisplayAverageSurfaceWindDirection.Resolve(windData)}");
-            result.Append($"{windData.AverageWindSpeed:00}");
+            result.Append($"{DisplayAverageSurfaceWindSpeed.Resolve(windData)}");
+            result.Append($"{DisplayMaxSurfaceWindSpeed.Resolve(windData)}");
             result.Append("KT");
+            result.Append($"{DisplayVariationSurfaceWindDirection.Resolve(windData)}");
+            
             
             return result.ToString();
         }
