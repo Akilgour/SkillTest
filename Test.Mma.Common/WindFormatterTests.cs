@@ -53,5 +53,6 @@
             Assert.That(result, Is.EqualTo("00000KT"));
         }
  
+        //I would put more tests here and test some more real world examples
     }
 }
